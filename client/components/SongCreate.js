@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import { Link } from "react-router";
+import { Link, hashHistory } from "react-router";
 
 class SongCreate extends Component {
   constructor(props) {
@@ -11,11 +11,15 @@ class SongCreate extends Component {
   onSubmit(event) {
     console.log("e is: ", event);
     event.preventDefault();
-    this.props.mutate({
-      variables: {
-        title: this.state.title
-      }
-    });
+    this.props
+      .mutate({
+        variables: {
+          title: this.state.title
+        }
+      })
+      .then(() => {
+        hashHistory.push("/");
+      });
     console.log("this.state is: ", this.state);
     console.log("SongCreate this.props is: ", this.props);
   }
