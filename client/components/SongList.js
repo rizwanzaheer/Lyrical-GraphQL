@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
+import { Link } from "react-router";
+
 class SongList extends Component {
   renderSongs() {
     return this.props.data.songs.map(({ title, id }) => {
       return (
-        <li key={id} className="collection-item">
+        <li className="collection-item" key={id}>
           {title}
         </li>
       );
@@ -15,7 +17,14 @@ class SongList extends Component {
     const { loading } = this.props.data;
     console.log("this.props is: ", this.props);
     if (loading) return <div>Loading...</div>;
-    return <ul className="collection">{this.renderSongs()}</ul>;
+    return (
+      <div>
+        <ul className="collection">{this.renderSongs()}</ul>
+        <Link to="/songs/new" className={"btn-floating btn-large red right"}>
+          <i className="material-icons">add</i>
+        </Link>
+      </div>
+    );
   }
 }
 
