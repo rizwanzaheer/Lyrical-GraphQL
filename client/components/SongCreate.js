@@ -22,9 +22,7 @@ class SongCreate extends Component {
   render() {
     return (
       <div>
-        <Link to="/" className={"btn-floating btn-large red right"}>
-          Back
-        </Link>
+        <Link to="/">Back</Link>
         <h3>Create a new Song</h3>
         <form onSubmit={this.onSubmit.bind(this)}>
           <lable>Song Title:</lable>
