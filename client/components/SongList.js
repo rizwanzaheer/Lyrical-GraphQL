@@ -9,11 +9,16 @@ import gql from "graphql-tag";
 class SongList extends Component {
   onSongDelete(id) {
     console.log("onSongDelete id is:", id);
-    this.props.mutate({
-      variables: {
-        id
-      }
-    });
+    this.props
+      .mutate({
+        variables: {
+          id
+        }
+      })
+      .then(() => {
+        this.props.data.refetch();
+      })
+      .catch(e => console.log("on song delete error is: ", e));
   }
   renderSongs() {
     return this.props.data.songs.map(({ title, id }) => {
