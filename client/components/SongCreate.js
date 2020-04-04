@@ -3,23 +3,27 @@ import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import { Link, hashHistory } from "react-router";
 
+// queries
+import query from "../queries/fetchSongs";
+
 class SongCreate extends Component {
   constructor(props) {
     super(props);
     this.state = { title: "" };
   }
   onSubmit(event) {
-    console.log("e is: ", event);
     event.preventDefault();
     this.props
       .mutate({
         variables: {
           title: this.state.title
-        }
+        },
+        refetchQueries: [{ query }]
       })
       .then(() => {
         hashHistory.push("/");
-      });
+      })
+      .catch(e => console.log("error is: ", e));
     console.log("this.state is: ", this.state);
     console.log("SongCreate this.props is: ", this.props);
   }
