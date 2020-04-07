@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import fetchSong from "../queries/fetchSong";
 
 import LyricCreate from "./LyricCreate";
+import LyricList from "./LyricList";
 
 class SongDetail extends Component {
   render() {
@@ -17,7 +18,8 @@ class SongDetail extends Component {
       <div>
         <Link to="/">Back</Link>
         <h3>{song.title}</h3>
-        <LyricCreate />
+        <LyricList lyrics={song.lyrics} />
+        <LyricCreate songId={this.props.params.id} />
       </div>
     );
   }
@@ -26,7 +28,7 @@ class SongDetail extends Component {
 export default graphql(fetchSong, {
   // this is used to grab query params from URL & pass down
   // to GraphQL query as params id
-  options: props => {
+  options: (props) => {
     return { variables: { id: props.params.id } };
-  }
+  },
 })(SongDetail);
