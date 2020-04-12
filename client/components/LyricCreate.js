@@ -16,15 +16,15 @@ class LyricCreate extends Component {
       .mutate({
         variables: {
           content: this.state.content,
-          songId: this.props.songId
-        }
+          songId: this.props.songId,
+        },
       })
       .then(() => {
         console.log("Lyric Create then");
         // hashHistory.push("/");
         this.setState({ content: "" });
       })
-      .catch(e => console.log("Lyric Create error is: ", e));
+      .catch((e) => console.log("Lyric Create error is: ", e));
     console.log("Lyric Create this.state is: ", this.state);
     console.log("Lyric Create this.props is: ", this.props);
   }
@@ -36,9 +36,9 @@ class LyricCreate extends Component {
           <label>Add a Lyric</label>
           <input
             value={this.state.content}
-            onChange={event =>
+            onChange={(event) =>
               this.setState({
-                content: event.target.value
+                content: event.target.value,
               })
             }
           />
@@ -53,6 +53,7 @@ const mutation = gql`
     addLyricToSong(content: $content, songId: $songId) {
       id
       lyrics {
+        id
         content
       }
     }
